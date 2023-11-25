@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>와라, 편의점 - 식단 추천 프로그램</title>
+  <script src = "menu.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      width: 100%;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+    }
+    main {
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+      color: #555;
+    }
+    input {
+      width: calc(100% - 20px);
+      padding: 15px; /* 수정된 부분: 높이를 더 크게 조정 */
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #34495e;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>와라, 편의점 - 식단 추천 프로그램</h1>
+  </header>
+  <main>
+    <h2>사용자 정보 입력</h2>
+    <label for="height">키 (cm):</label>
+    <input type="number" id="height" placeholder="키를 입력하세요">
+    <label for="weight">몸무게 (kg):</label>
+    <input type="number" id="weight" placeholder="몸무게를 입력하세요">
+    <label for="budget">예산:</label>
+    <input type="number" id="budget" placeholder="예산을 입력하세요">
+    <!-- 기타 사용자 정보 입력란 추가 -->
+
+    <h2>편의점 식단 추천</h2>
+    <button onclick="recommendDiet()">추천 받기</button>
+
+    <div id="result">
+      <!-- 추천 결과가 이 곳에 표시될 것입니다. -->
+    </div>
+  </main>
+
+  <script>
+    function calculateStandardCalories(height, weight) {
+      const bmi = weight / Math.pow(height / 100, 2);
+      const standardCalories = 30 * bmi + 70;
+      return Math.round(standardCalories);
+    }
+
+    function recommendDiet() {
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const budget = document.getElementById('budget').value;
+
+      const standardCalories = calculateStandardCalories(height, weight);
+
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `
+        <p>표준 열량: ${standardCalories} kcal</p>
+        <p>예산: ${budget} 원</p>
+        <!-- 추천된 식단 및 상세 정보 추가 -->
+      `;
+    }
+  </script>
+</body>
+</html>
